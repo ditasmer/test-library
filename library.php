@@ -77,8 +77,8 @@ if(isset($_POST['alta'])){
 //creamos tr para ir mostrando fila a fila el contenido de libros
 $tr = '';
 print_r($libreria);
-//ordenar por id, clave del array
-//ksort($libreria);
+//ordenar por titulo
+asort($libreria);
 foreach ($libreria as $key_id => $libro) {
 	//<tr><td>ID</td><td>Titulo</td><td>Precio</td><td></td></tr>
 	$tr.="<tr>";
