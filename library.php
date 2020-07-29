@@ -97,7 +97,6 @@ foreach ($libreria as $key_id => $libro) {
 	$tr.="<td>$libro[titulo]</td>";
 	$tr.="<td>$libro[precio]</td>";
 	$tr.="<td>";
-	$tr.="<form method='post' action='#'>";
 	$tr.= "</td>";
 	$tr.="</tr>";
 
