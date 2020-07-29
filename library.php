@@ -4,6 +4,9 @@ Vamos a hacer un ejercicio parecido en donde daremos de alta libros y precios a 
 Para la modificación vamos a utilizar un listener que ejecute una función que busque los campos en la tabla y los traslade al formulario oculto. Para ello utilizaremos las funciones closest() y find() de jquery para recuperar los datos del libro a modificar de la tabla.
 Para la baja utilizaremos eventos onclick situados en el propio botón. onclick='baja(\"$id\")'*/
 
+//activar variables de sesion PRIMERA LINEA DE CODIGO!!!!!
+session_start();
+
 //ini vars
 $mensaje = '';
 $titulo = '';
@@ -36,7 +39,7 @@ if(isset($_POST['alta'])){
 		$libreria[$id_libro]['titulo'] = $titulo;
 		$libreria[$id_libro]['precio'] = $precio;
 		$mensaje = 'Alta efectuada con éxito';
-		//limìar datos
+		//limpìar datos
 		$id_libro = '';
 		$titulo = '';
 		$precio = '';
