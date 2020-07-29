@@ -8,7 +8,8 @@ Para la baja utilizaremos eventos onclick situados en el propio botón. onclick=
 $mensaje = '';
 $titulo = '';
 $precio = '';
-$personas = [];
+$libreria = [];
+
 
 /*******************************/
 /****** ALTA DE LIBRO ********/
