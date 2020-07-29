@@ -6,12 +6,15 @@ Para la baja utilizaremos eventos onclick situados en el propio botón. onclick=
 
 //activar variables de sesion PRIMERA LINEA DE CODIGO!!!!!
 session_start();
+//eliminamos toda la memoria de la sesion, como limpiar array de sesion
+//session_destroy();
 
 //ini vars
 $mensaje = '';
 $titulo = '';
 $precio = '';
 $libreria = [];
+$repetido = false;
 
 //guardar datos de sesion
 if(isset($_SESSION['libreria'])){
@@ -21,6 +24,16 @@ if(isset($_SESSION['libreria'])){
 /*******************************/
 /****** ALTA DE LIBRO ********/
 /*******************************/
+function tituloRepetido($titulo){
+	global $libreria;
+	foreach ($libreria as $key => $libro) {
+		if ($titulo == $libro['titulo']) {
+			return true;
+		}
+	}
+	return false;
+}
+
 if(isset($_POST['alta'])){
 	//recupera datos libro formulario limpiando espacios por delante y por detras
 	$id_libro = uniqid();
@@ -35,6 +48,12 @@ if(isset($_POST['alta'])){
 		if($precio == ''){
 			throw new Exception("Precio obligatorio", 10);
 		}
+		//comprueba libro no repetido
+		$repetido = tituloRepetido($titulo);
+		if($repetido){
+			throw new Exception("Título repetido", 10);
+		}
+
 		//una vez validados los datos damos de alta en el array de libros
 		$libreria[$id_libro]['titulo'] = $titulo;
 		$libreria[$id_libro]['precio'] = $precio;
@@ -54,6 +73,7 @@ if(isset($_POST['alta'])){
 
 //guardar el array de personas en la variable de sesion para no perderlo y que actue como la variable sesion que no se elimina cuando refrescas...
 $_SESSION['libreria'] = $libreria;
+$libreria = [];
 
 ?>
 <!DOCTYPE html>
