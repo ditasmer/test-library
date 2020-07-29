@@ -78,7 +78,17 @@ if(isset($_POST['alta'])){
 $tr = '';
 print_r($libreria);
 //ordenar por titulo
-asort($libreria);
+//asort($libreria);
+
+//ordenar por precio
+$lista_precios = [];
+//foreach reducido
+foreach ($libreria as $libro) {
+	array_push($lista_precios, $libro['precio']);
+}
+array_multisort($lista_precios, SORT_ASC, $libreria);
+
+
 foreach ($libreria as $key_id => $libro) {
 	//<tr><td>ID</td><td>Titulo</td><td>Precio</td><td></td></tr>
 	$tr.="<tr>";
