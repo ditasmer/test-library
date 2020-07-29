@@ -10,6 +10,10 @@ $titulo = '';
 $precio = '';
 $libreria = [];
 
+//guardar datos de sesion
+if(isset($_SESSION['libreria'])){
+		$libreria = $_SESSION['libreria'];
+}
 
 /*******************************/
 /****** ALTA DE LIBRO ********/
@@ -45,6 +49,8 @@ if(isset($_POST['alta'])){
 	}
 }
 
+//guardar el array de personas en la variable de sesion para no perderlo y que actue como la variable sesion que no se elimina cuando refrescas...
+$_SESSION['libreria'] = $libreria;
 
 ?>
 <!DOCTYPE html>
