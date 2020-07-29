@@ -104,16 +104,19 @@ array_multisort($lista_precios, SORT_ASC, $libreria);
 foreach ($libreria as $key_id => $libro) {
 	//<tr><td>ID</td><td>Titulo</td><td>Precio</td><td></td></tr>
 	$tr.="<tr>";
+	//clase a la columna id para tratarlo en JS
 	$tr.="<td class='id_libro'>$key_id</td>";
 	//añadimos el input type a text para que sea editable
-	$tr.="<td>$libro[titulo]</td>";
-	$tr.="<td>$libro[precio]</td>";
+	$tr.="<td><input class='titulo_libro' type='text' value='$titulo'></td>";
+	$tr.="<td><input class='precio_libro' type='text' value='$precio'></td>";
 	$tr.="<td>";
 	//enviamos al servidor el valor dl id que queremos dar de baja, oculto para el usuario, visible para el servidor HIDDEN
 	$tr.="<form method='post' action='#'>";
 	$tr.="<input type='hidden' value='$key_id' name='id_baja'>";
 	$tr.="<input type='submit' name='bajalibro' value='baja libro'>";
 	$tr.="</form>";
+	//añadimos button con clase modificar para tratarlo con JS, su formulario está en el HTML HIDDEN
+	$tr.="<input type='button' value='modificar' class='modificar'>";
 	$tr.= "</td>";
 	$tr.="</tr>";
 
@@ -168,6 +171,16 @@ $libreria = [];
 			<?=$tr;?>
 			</table>
 		</div>
+		<br>
+		<!--formulario oculto para el modificar HIDDEN-->
+		<form id='formulario_modificar' method='post' action='#'>
+			<!--detectar elemento: php -> name js -> id-->
+			<input type='hidden' name='id_mod' id='id_mod'></input>
+			<input type='hidden' name='titulo_mod' id='titulo_mod'></input>
+			<input type='hidden' name='precio_mod' id='precio_mod'></input>
+			<input type='hidden' name='modificar'></input>
+		
+		</form>
 	</div>
 </body>
 </html>
