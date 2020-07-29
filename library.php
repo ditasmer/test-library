@@ -71,6 +71,18 @@ if(isset($_POST['alta'])){
 	}
 }
 
+/*******************************/
+/****** BAJA DE 1 LIBRO ********/
+/*******************************/
+if(isset($_POST['bajalibro'])){
+	//recuperar el id
+	$id_baja = $_POST['id_baja'];
+
+	//borrar libro, borrar fila del array
+	unset($libreria[$id_baja]);
+	$mensaje_baja = 'baja de 1 libro efectuada con éxito';
+}
+
 /************************************/
 /****** CONSULTA LIBROS *************/
 /************************************/
@@ -97,6 +109,11 @@ foreach ($libreria as $key_id => $libro) {
 	$tr.="<td>$libro[titulo]</td>";
 	$tr.="<td>$libro[precio]</td>";
 	$tr.="<td>";
+	//enviamos al servidor el valor dl id que queremos dar de baja, oculto para el usuario, visible para el servidor HIDDEN
+	$tr.="<form method='post' action='#'>";
+	$tr.="<input type='hidden' value='$key_id' name='id_baja'>";
+	$tr.="<input type='submit' name='bajalibro' value='baja libro'>";
+	$tr.="</form>";
 	$tr.= "</td>";
 	$tr.="</tr>";
 
