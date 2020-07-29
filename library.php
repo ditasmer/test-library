@@ -71,6 +71,29 @@ if(isset($_POST['alta'])){
 	}
 }
 
+/************************************/
+/****** CONSULTA LIBROS *************/
+/************************************/
+//creamos tr para ir mostrando fila a fila el contenido de libros
+$tr = '';
+print_r($libreria);
+//ordenar por id, clave del array
+//ksort($libreria);
+foreach ($libreria as $key_id => $libro) {
+	//<tr><td>ID</td><td>Titulo</td><td>Precio</td><td></td></tr>
+	$tr.="<tr>";
+	$tr.="<td class='id_libro'>$key_id</td>";
+	//añadimos el input type a text para que sea editable
+	$tr.="<td>$libro[titulo]</td>";
+	$tr.="<td>$libro[precio]</td>";
+	$tr.="<td>";
+	$tr.="<form method='post' action='#'>";
+	$tr.= "</td>";
+	$tr.="</tr>";
+
+	
+}
+
 //guardar el array de personas en la variable de sesion para no perderlo y que actue como la variable sesion que no se elimina cuando refrescas...
 $_SESSION['libreria'] = $libreria;
 $libreria = [];
@@ -115,6 +138,8 @@ $libreria = [];
 		</form><br>
 		<div>
 			<table>
+				<tr><th>ID</th><th>Título</th><th>Precio</th><th></th></tr>
+			<?=$tr;?>
 			</table>
 		</div>
 	</div>
