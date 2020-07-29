@@ -107,8 +107,8 @@ foreach ($libreria as $key_id => $libro) {
 	//clase a la columna id para tratarlo en JS
 	$tr.="<td class='id_libro'>$key_id</td>";
 	//añadimos el input type a text para que sea editable
-	$tr.="<td><input class='titulo_libro' type='text' value='$titulo'></td>";
-	$tr.="<td><input class='precio_libro' type='text' value='$precio'></td>";
+	$tr.="<td><input class='titulo_libro' type='text' value='$libro[titulo]'></td>";
+	$tr.="<td><input class='precio_libro' type='text' value='$libro[precio]'></td>";
 	$tr.="<td>";
 	//enviamos al servidor el valor dl id que queremos dar de baja, oculto para el usuario, visible para el servidor HIDDEN
 	$tr.="<form method='post' action='#'>";
@@ -147,6 +147,7 @@ $libreria = [];
 		input[type=text] {width: 330px;}
 		form, table {margin:auto}
 	</style>
+	<!-- import jquery library-->
 	<script type="text/javascript" src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
 </head>
 <body>
@@ -179,7 +180,7 @@ $libreria = [];
 			<input type='hidden' name='titulo_mod' id='titulo_mod'></input>
 			<input type='hidden' name='precio_mod' id='precio_mod'></input>
 			<input type='hidden' name='modificar'></input>
-		
+
 		</form>
 	</div>
 </body>
