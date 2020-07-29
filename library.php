@@ -116,7 +116,7 @@ foreach ($libreria as $key_id => $libro) {
 	$tr.="<input type='submit' name='bajalibro' value='baja libro'>";
 	$tr.="</form>";
 	//añadimos button con clase modificar para tratarlo con JS, su formulario está en el HTML HIDDEN
-	$tr.="<input type='button' value='modificar' class='modificar'>";
+	$tr.="<input type='button' value='modificar' class='modificar' id='button_mod'>";
 	$tr.= "</td>";
 	$tr.="</tr>";
 
@@ -149,6 +149,24 @@ $libreria = [];
 	</style>
 	<!-- import jquery library-->
 	<script type="text/javascript" src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+	<script type="text/javascript">
+/*		document.querySelector('#button_mod').on('click', trasladarDatos)
+		function trasladarDatos(){
+    		alert('bla bla'); 
+			console.log('trasladarDatos');
+			alert("hola trasladarDatos");
+		}		
+*/
+		$(inicio)
+		function inicio(){
+			//detecta todas las acciones de click
+			$('.modificar').on('click', trasladarDatos)
+		}
+		function trasladarDatos(){
+			console.log('trasladarDatos');
+			alert("hola trasladarDatos");
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
