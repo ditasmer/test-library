@@ -83,6 +83,34 @@ if(isset($_POST['bajalibro'])){
 	$mensaje_baja = 'baja de 1 libro efectuada con éxito';
 }
 
+/*************************************************/
+/****MODIFICACION DE LIBRO SELECCIONADO **********/
+/*************************************************/
+if(isset($_POST['modificar'])){
+	$id_mod = trim($_POST['id_mod']);
+	$titulo_mod = trim($_POST['titulo_mod']);
+	$precio_mod = trim($_POST['precio_mod']);
+
+	try {
+			//validar los datos
+			if($titulo_mod == ''){
+				throw new Exception("título obligatorio", 10);
+			}if($precio_mod == ''){
+				throw new Exception("precio obligatoria", 10);
+			}
+			//modificar los datos del libro en el array
+			$libreria[$id_mod]['titulo'] = $titulo_mod;
+			$libreria[$id_mod]['precio'] = $precio_mod;
+
+			//mensaje de modificacion efectuada
+			$mensaje = "Modificacion de libro efectuada con éxito";
+	} catch (Exception $e){
+			//tratamiento de errores
+			$mensaje = $e->getMessage();
+	}
+
+}
+
 /************************************/
 /****** CONSULTA LIBROS *************/
 /************************************/
@@ -123,7 +151,7 @@ foreach ($libreria as $key_id => $libro) {
 	
 }
 
-//guardar el array de personas en la variable de sesion para no perderlo y que actue como la variable sesion que no se elimina cuando refrescas...
+//guardar el array de libros en la variable de sesion para no perderlo y que actue como la variable sesion que no se elimina cuando refrescas...
 $_SESSION['libreria'] = $libreria;
 $libreria = [];
 
@@ -163,8 +191,24 @@ $libreria = [];
 			$('.modificar').on('click', trasladarDatos)
 		}
 		function trasladarDatos(){
-			console.log('trasladarDatos');
-			alert("hola trasladarDatos");
+			//console.log('trasladarDatos');
+			//alert("hola trasladarDatos");
+			//accedemos al DOM según classname 
+			let tr = $(this).closest('tr')
+			let id = tr.find('td.id_libro').text()
+			let titulo = tr.find('input.titulo_libro').val()
+			let precio = tr.find('input.precio_libro').val()
+			alert(id)
+			alert(titulo)
+			alert(precio)
+
+			//trasladar los datos del DOM al formulario oculto
+			$('#id_mod').val(id)
+			$('#titulo_mod').val(titulo)
+			$('#precio_mod').val(precio)
+
+			//hacer el submit del formulario
+			$('#formulario_modificar').submit();
 		}
 	</script>
 </head>
