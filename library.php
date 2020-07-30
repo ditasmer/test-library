@@ -207,20 +207,36 @@ if (isset($_POST)) {
 	<!-- import jquery library-->
 	<script type="text/javascript" src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
 	<script type="text/javascript">
-/*		document.querySelector('#button_mod').on('click', trasladarDatos)
-		function trasladarDatos(){
-    		alert('bla bla'); 
-			console.log('trasladarDatos');
-			alert("hola trasladarDatos");
-		}		
-*/
-		$(inicio)
+		//Activar listeners de botones Modificar: Opción 1, 2, 3
+		//OPCIÓN 1 (ejercicio anterior)
+		/*$(inicio)
 		function inicio(){
 			//detecta todas las acciones de click
 			$('.modificar').on('click', trasladarDatos)
+		}*/
+		//OPCION 2 (yo)
+		window.onload = function() {
+			var botones = document.querySelectorAll('.modificar');
+			botones.forEach(
+				function(boton){
+					boton.addEventListener("click", trasladarDatos, false);
+				}
+			);
 		}
+		//OPCION 3 (Profesor)
+		/*window.onload = function() {
+			var botones = document.querySelectorAll('.modificar')
+			botones.forEach(function(boton){
+				boton.onclick = trasladarDatos
+    			//alert('bla bla'); 
+				console.log('trasladarDatos1')
+				//alert("hola trasladarDatos");
+			})
+		}*/
+
+		
 		function trasladarDatos(){
-			//console.log('trasladarDatos');
+			console.log('trasladarDatos');
 			//alert("hola trasladarDatos");
 			//accedemos al DOM según classname 
 			let tr = $(this).closest('tr')
