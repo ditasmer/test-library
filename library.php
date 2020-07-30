@@ -20,6 +20,13 @@ $repetido = false;
 if(isset($_SESSION['libreria'])){
 		$libreria = $_SESSION['libreria'];
 }
+//si hay una petción guardada en sesión y la comparamos con la que llega desde el navegador
+if (isset($_POST) && isset($_SESSION['post'])) {
+	//Si es la misma la eliminamos
+	if ($_POST == $_SESSION['post']) {
+		unset($_POST);
+	}
+}
 
 /*******************************/
 /****** ALTA DE LIBRO ********/
@@ -170,6 +177,13 @@ foreach ($libreria as $key_id => $libro) {
 $_SESSION['libreria'] = $libreria;
 $libreria = [];
 
+//verifica si ha llegado un POST y lo guardamos en variable de sesion
+if (isset($_POST)) {
+	$_SESSION['post'] = $_POST;
+	//echo "<script>alert ('ha llegado un POST')</script>";
+	echo "<script>console.log('ha llegado un POST')</script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -213,9 +227,9 @@ $libreria = [];
 			let id = tr.find('td.id_libro').text()
 			let titulo = tr.find('input.titulo_libro').val()
 			let precio = tr.find('input.precio_libro').val()
-			alert(id)
-			alert(titulo)
-			alert(precio)
+			//alert(id)
+			//alert(titulo)
+			//alert(precio)
 
 			//trasladar los datos del DOM al formulario oculto
 			$('#id_mod').val(id)
