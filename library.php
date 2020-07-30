@@ -86,6 +86,15 @@ if(isset($_POST['bajalibro'])){
 /*************************************************/
 /****MODIFICACION DE LIBRO SELECCIONADO **********/
 /*************************************************/
+function tituloRepetidoAlModificar($titulo, $id){
+	global $libreria;
+	foreach ($libreria as $key => $libro) {
+		if (($titulo == $libro['titulo']) && ($id != $key)) {
+			return true;
+		}
+	}
+	return false;
+}
 if(isset($_POST['modificar'])){
 	$id_mod = trim($_POST['id_mod']);
 	$titulo_mod = trim($_POST['titulo_mod']);
@@ -95,8 +104,14 @@ if(isset($_POST['modificar'])){
 			//validar los datos
 			if($titulo_mod == ''){
 				throw new Exception("título obligatorio", 10);
-			}if($precio_mod == ''){
+			}
+			if($precio_mod == ''){
 				throw new Exception("precio obligatoria", 10);
+			}
+			//comprueba que el nuevo título no coincide con otro que ya existe
+			$repetido = tituloRepetidoAlModificar($titulo_mod, $id_mod);
+			if($repetido){
+				throw new Exception("No se puede modificar, el título ya existe", 10);
 			}
 			//modificar los datos del libro en el array
 			$libreria[$id_mod]['titulo'] = $titulo_mod;
